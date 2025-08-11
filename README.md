@@ -1,5 +1,5 @@
 # 2m-order-bot
-# Telegram Order Bot with Google Sheets
+## Telegram Order Bot with Google Sheets
 
 ## Features
 - Reads menu from Google Sheet tab **Menu**
