@@ -87,6 +87,23 @@ async def message_handler(update: Update, context: ContextTypes.DEFAULT_TYPE):
                 text=f"📦 New order:\nName: {order[0]}\nItem: {order[1]}\nQuantity: {order[2]}"
             )
         context.user_data.clear()
+##ADD HTTP FAKE
+from threading import Thread
+from http.server import HTTPServer, BaseHTTPRequestHandler
+
+class Handler(BaseHTTPRequestHandler):
+    def do_GET(self):
+        self.send_response(200)
+        self.end_headers()
+        self.wfile.write(b'Bot is running!')
+
+def run_http_server():
+    server = HTTPServer(('0.0.0.0', int(os.environ.get('PORT', 8000))), Handler)
+    server.serve_forever()
+
+# Start HTTP server in a separate thread
+Thread(target=run_http_server, daemon=True).start()
+#End
 
 def main():
     app = Application.builder().token(BOT_TOKEN).build()
@@ -99,3 +116,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+
